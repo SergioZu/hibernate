@@ -43,7 +43,7 @@ public class DBUtils {
 		Connection connection = null;
 		try {
 			ctx = new InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/ColegioDB");
+			DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/colegio");
 			connection = ds.getConnection();
 
 		} catch (NamingException | SQLException e) {

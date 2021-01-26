@@ -58,7 +58,7 @@ public class FormularioActualizarAsignaturasController extends HttpServlet {
 	 	
 	 	listaAsignatura = a.obtenerAsignaturaPorIdNombreCursoTasa(id, nombre, curso, tasa);
 		
-		
+	 	request.setAttribute("lista", listaAsignatura);
 		
 		RequestDispatcher d = getServletContext().getRequestDispatcher("/WEB-INF/vistas/asignaturas/actualizarAsignaturas.jsp");
 		d.forward(request, response);

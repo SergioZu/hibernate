@@ -19,36 +19,28 @@ public class AsignaturasEntity {
 	private int id;
 
 	@Column(name = "nombre")
-	private String nombreAsignatura;
+	private String nombre;
 
 	@Column(name = "curso")
 	private int curso;
 
 	@Column(name = "tasa")
-	private Double tasa;
+	private int tasa;
 	
 
-	@OneToMany(mappedBy = "alumnos")
-	List<AlumnoEntity> alumnos;
+	
 
 	
 	//Constructores, Getters y setters
 	
 	
 	
-	public AsignaturasEntity(int id, String nombreAsignatura, int curso, Double tasa, List<AlumnoEntity> alumnos) {
-		super();
-		this.id = id;
-		this.nombreAsignatura = nombreAsignatura;
-		this.curso = curso;
-		this.tasa = tasa;
-		this.alumnos = alumnos;
-	}
 	
-	public AsignaturasEntity(int id, String nombreAsignatura, int curso, Double tasa) {
+	
+	public AsignaturasEntity(int id, String nombre, int curso, int tasa) {
 		super();
 		this.id = id;
-		this.nombreAsignatura = nombreAsignatura;
+		this.nombre = nombre;
 		this.curso = curso;
 		this.tasa = tasa;
 	}
@@ -71,12 +63,12 @@ public class AsignaturasEntity {
 
 
 	public String getNombreAsignatura() {
-		return nombreAsignatura;
+		return nombre;
 	}
 
 
-	public void setNombreAsignatura(String nombreAsignatura) {
-		this.nombreAsignatura = nombreAsignatura;
+	public void setNombreAsignatura(String nombre) {
+		this.nombre = nombre;
 	}
 
 
@@ -90,24 +82,15 @@ public class AsignaturasEntity {
 	}
 
 
-	public Double getTasa() {
+	public Integer getTasa() {
 		return tasa;
 	}
 
 
-	public void setTasa(Double tasa) {
+	public void setTasa(Integer tasa) {
 		this.tasa = tasa;
 	}
 
-
-	public List<AlumnoEntity> getAlumnos() {
-		return alumnos;
-	}
-
-
-	public void setAlumnos(List<AlumnoEntity> alumnos) {
-		this.alumnos = alumnos;
-	}
 
 
 	

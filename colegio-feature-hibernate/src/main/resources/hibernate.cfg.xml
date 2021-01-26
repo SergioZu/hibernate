@@ -10,7 +10,7 @@
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="connection.url">jdbc:mysql://localhost:3306/colegio</property>
         <property name="connection.username">root</property>
-        <property name="connection.password">819130</property>
+        <property name="connection.password">1234</property>
 
         <!-- Seteamos el pool de conexiones a 1-->
         <property name="connection.pool_size">100</property>
@@ -28,6 +28,7 @@
 		
 			<mapping class="com.kike.colegio.entities.AlumnoEntity"/>
 			<mapping class="com.kike.colegio.entities.MunicipiosEntity"/>
+			<mapping class="com.kike.colegio.entities.AsignaturasEntity"/>
  
     </session-factory>
 

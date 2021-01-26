@@ -27,8 +27,7 @@ public class AlumnoEntity {
 	@Column(name = "familia_Numerosa")
 	private int famNumerosa;	
 	
-	@OneToMany(mappedBy = "asignaturas")
-	List<AsignaturasEntity> asignaturas;
+	
 	
 	
 	//Constructores, Getters y setters 

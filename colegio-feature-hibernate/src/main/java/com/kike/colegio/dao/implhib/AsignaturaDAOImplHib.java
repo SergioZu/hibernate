@@ -19,9 +19,9 @@ public class AsignaturaDAOImplHib implements AsignaturaDAO{
 	@Override
 	public List<AsignaturaDTO> obtenerAsignaturaPorIdNombreCursoTasa(String id, String nombre, String curso,
 			String tasa) {
-		String jpql = " select new com.kike.colegio.dtos.AsignaturaDTO String id, String nombre, String curso, String tasa"
+		String jpql = " select new com.kike.colegio.dtos.AsignaturaDTO "
 				+ " (a.id, a.nombre, a.curso, a.tasa)"
-				+ "FROM AlumnoEntity a";
+				+ "FROM AsignaturasEntity a where  CAST( a.id AS string )  LIKE :id  AND a.nombre LIKE :nombre  AND CAST( a.curso AS string )  LIKE :curso  AND CAST( a.tasa AS string )  LIKE :tasa ";
 
 		SessionFactory factory = DBUtils.creadorSessionFactory();
 		Session s = factory.getCurrentSession();
@@ -38,7 +38,7 @@ public class AsignaturaDAOImplHib implements AsignaturaDAO{
 	@Override
 	public Integer insertarAsignatura(String id, String nombre, String curso, String tasa) {
 
-		AsignaturasEntity a = new AsignaturasEntity(Integer.parseInt(id), nombre, Integer.parseInt(curso), Double.parseDouble(tasa));
+		AsignaturasEntity a = new AsignaturasEntity(Integer.parseInt(id), nombre, Integer.parseInt(curso), Integer.parseInt(tasa));
 		
 		SessionFactory factory = DBUtils.creadorSessionFactory();
 		Session s = factory.getCurrentSession();
@@ -55,8 +55,8 @@ public class AsignaturaDAOImplHib implements AsignaturaDAO{
 
 	@Override
 	public Integer actualizarAsignatura(String idOld, String idNew, String nombre, String curso, String tasa) {
-		//Conversión famNumerosa a Integer (0 o 1), ya que viene a "on" o null
-				AsignaturasEntity a = new AsignaturasEntity(Integer.parseInt(idNew), nombre, Integer.parseInt(curso), Double.parseDouble(tasa));
+		
+				AsignaturasEntity a = new AsignaturasEntity(Integer.parseInt(idNew), nombre, Integer.parseInt(curso), Integer.parseInt(tasa));
 				
 				SessionFactory factory = DBUtils.creadorSessionFactory();
 				Session s = factory.getCurrentSession();
@@ -70,20 +70,15 @@ public class AsignaturaDAOImplHib implements AsignaturaDAO{
 
 	@Override
 	public Integer eliminarAsignatura(String id) {
+	
 		SessionFactory factory = DBUtils.creadorSessionFactory();
 		Session s = factory.getCurrentSession();
 		
 		s.beginTransaction();
-		//Hibernate recupera la Entidad a borrar
-		AsignaturasEntity a = s.get(AsignaturasEntity.class, Integer.parseInt(id));
-		//Borra la entidad
-	    if (a != null) {
-	        s.delete(a);
-	    	s.close();
-	        return 1;
-	    }
-		s.close();
-	    return 0;
+		Query query = s.createQuery("DELETE FROM AlumnoEntity where id = :id").setParameter("id", Integer.parseInt(id));
+		int result = query.executeUpdate();		
+		s.close();		
+		return result;
 	}
 
 	@Override

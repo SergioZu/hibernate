@@ -15,7 +15,9 @@ import com.kike.colegio.dao.AlumnoDAO;
 import com.kike.colegio.dao.AsignaturaDAO;
 import com.kike.colegio.dao.impl.AlumnoDAOImpl;
 import com.kike.colegio.dao.impl.AsignaturaDAOImpl;
+import com.kike.colegio.dao.implhib.AlumnoDAOImplHib;
 import com.kike.colegio.dao.implhib.AsignaturaDAOImplHib;
+import com.kike.colegio.dtos.AlumnoDTO;
 import com.kike.colegio.dtos.AsignaturaDTO;
 
 /**
@@ -55,7 +57,7 @@ public class FormularioBorrarAsignaturaController extends HttpServlet {
 	 	
 	 	listaAsignatura = a.obtenerAsignaturaPorIdNombreCursoTasa(id, nombre, curso, tasa);
 		
-		
+	 	request.setAttribute("lista", listaAsignatura);
 		
 		RequestDispatcher d = getServletContext().getRequestDispatcher("/WEB-INF/vistas/asignaturas/borrarAsignaturas.jsp");
 		d.forward(request, response);

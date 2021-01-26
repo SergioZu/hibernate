@@ -42,9 +42,11 @@ public class BorrarAsignaturaController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AsignaturaDAO a = new AsignaturaDAOImpl();
+		
 		
 		String id = request.getParameter("id");;
+		
+		AsignaturaDAO a = new AsignaturaDAOImpl();
 		
 		a.eliminarAsignatura(id);
 		

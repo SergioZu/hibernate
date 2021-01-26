@@ -32,8 +32,8 @@ public class AsignaturaDAOImpl implements AsignaturaDAO{
 			asignaturasResultSet = ps.executeQuery();
 
 			while (asignaturasResultSet.next()) {
-				AsignaturaDTO a = new AsignaturaDTO(asignaturasResultSet.getString(1), asignaturasResultSet.getString(2), 
-											asignaturasResultSet.getString(3), asignaturasResultSet.getString(4));
+				AsignaturaDTO a = new AsignaturaDTO(asignaturasResultSet.getInt(1), asignaturasResultSet.getString(2), 
+											asignaturasResultSet.getInt(3), asignaturasResultSet.getInt(4));
 				listaAsignaturas.add(a);
 			}
 		} catch (SQLException e) {
@@ -118,7 +118,7 @@ public class AsignaturaDAOImpl implements AsignaturaDAO{
 		
 		try {
 			ps = connection.prepareStatement(sql);
-			ps.setString(1, id);
+			ps.setInt(1,Integer.parseInt(id));
 			
 			resultado = ps.executeUpdate();
 			
@@ -134,6 +134,8 @@ public class AsignaturaDAOImpl implements AsignaturaDAO{
 		}
 		
 		return resultado;
+		
+		
 	}
 	
 	@Override
