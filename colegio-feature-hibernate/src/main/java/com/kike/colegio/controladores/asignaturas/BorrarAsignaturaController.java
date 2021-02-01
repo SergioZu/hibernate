@@ -14,6 +14,7 @@ import com.kike.colegio.dao.AsignaturaDAO;
 import com.kike.colegio.dao.impl.AlumnoDAOImpl;
 import com.kike.colegio.dao.impl.AsignaturaDAOImpl;
 import com.kike.colegio.dao.implhib.AlumnoDAOImplHib;
+import com.kike.colegio.dao.implhib.AsignaturaDAOImplHib;
 
 /**
  * Servlet Implation class BorrarAsignaturaController
@@ -46,7 +47,7 @@ public class BorrarAsignaturaController extends HttpServlet {
 		
 		String id = request.getParameter("id");;
 		
-		AsignaturaDAO a = new AsignaturaDAOImpl();
+		AsignaturaDAO a = new AsignaturaDAOImplHib();
 		
 		a.eliminarAsignatura(id);
 		

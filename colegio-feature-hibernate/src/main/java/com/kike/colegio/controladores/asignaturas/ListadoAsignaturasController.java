@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.kike.colegio.dao.impl.AlumnoDAOImpl;
 import com.kike.colegio.dao.impl.AsignaturaDAOImpl;
+import com.kike.colegio.dao.implhib.AsignaturaDAOImplHib;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -71,7 +72,7 @@ public class ListadoAsignaturasController extends HttpServlet {
 		String curso = request.getParameter("curso");
 		String tasa = request.getParameter("tasa");
 		
-		AsignaturaDAO a = new AsignaturaDAOImpl();
+		AsignaturaDAO a = new AsignaturaDAOImplHib();
 	 	List<AsignaturaDTO> listaAsignaturas = new ArrayList<>();
 	 	
 	 	listaAsignaturas = a.obtenerAsignaturaPorIdNombreCursoTasa(id, nombre, curso, tasa);

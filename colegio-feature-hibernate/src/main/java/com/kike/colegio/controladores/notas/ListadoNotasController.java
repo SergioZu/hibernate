@@ -1,6 +1,8 @@
 package com.kike.colegio.controladores.notas;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kike.colegio.dao.NotaDAO;
 import com.kike.colegio.dao.impl.NotaDAOImpl;
+import com.kike.colegio.dao.implhib.NotaDAOImplHib;
+import com.kike.colegio.dtos.NotaDTO;
 
 /**
  * Servlet Implation class ListadoNotasController
@@ -45,11 +49,13 @@ public class ListadoNotasController extends HttpServlet {
 		String nota = request.getParameter("nota");
 		String fecha = request.getParameter("fecha");
 		
-		NotaDAO n = new NotaDAOImpl();
+		NotaDAO a = new NotaDAOImplHib();
+	 	List<NotaDTO> listaNota = new ArrayList<>();
+	 	
+	 	listaNota = a.obtenerNotaPorIdNombreAsignaturaNotaFecha(idAlumno, nombre, asignatura, nota, fecha);
 		
-		
-		
-		request.setAttribute("lista", n.obtenerNotaPorIdNombreAsignaturaNotaFecha(idAlumno, nombre, asignatura, nota, fecha));
+
+		request.setAttribute("lista", listaNota);
 		
 		RequestDispatcher d = getServletContext().getRequestDispatcher("/WEB-INF/vistas/notas/listadoNotas.jsp");
 		d.forward(request, response);

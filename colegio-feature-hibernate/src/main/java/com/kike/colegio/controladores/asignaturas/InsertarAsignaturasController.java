@@ -17,6 +17,7 @@ import com.kike.colegio.dao.impl.AlumnoDAOImpl;
 import com.kike.colegio.dao.impl.AsignaturaDAOImpl;
 import com.kike.colegio.dao.impl.CombosDAOImpl;
 import com.kike.colegio.dao.implhib.AlumnoDAOImplHib;
+import com.kike.colegio.dao.implhib.AsignaturaDAOImplHib;
 import com.kike.colegio.dtos.ComboDTO;
 import com.kike.colegio.utils.ComboUtils;
 
@@ -59,7 +60,7 @@ public class InsertarAsignaturasController extends HttpServlet {
 		String curso = request.getParameter("curso");
 		String tasa = request.getParameter("tasa");
 		
-		AsignaturaDAO a = new AsignaturaDAOImpl();		
+		AsignaturaDAO a = new AsignaturaDAOImplHib();		
 		Integer resultado = a.insertarAsignatura(id, nombre, curso, tasa);
 		
 		request.setAttribute("resultado", resultado);

@@ -29,6 +29,7 @@
 			<mapping class="com.kike.colegio.entities.AlumnoEntity"/>
 			<mapping class="com.kike.colegio.entities.MunicipiosEntity"/>
 			<mapping class="com.kike.colegio.entities.AsignaturasEntity"/>
+			<mapping class="com.kike.colegio.entities.NotasEntity"/>
  
     </session-factory>
 

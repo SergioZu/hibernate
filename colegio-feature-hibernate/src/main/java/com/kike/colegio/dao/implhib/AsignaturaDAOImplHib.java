@@ -27,7 +27,10 @@ public class AsignaturaDAOImplHib implements AsignaturaDAO{
 		Session s = factory.getCurrentSession();
 		s.beginTransaction();
 
-		Query query = s.createQuery(jpql).setParameter("id", "%" + id + "%").setParameter("nombre", "%" + nombre + "%").setParameter("curso", "%" + curso + "%").setParameter("tasa", "%" + tasa + "%");;
+		Query query = s.createQuery(jpql).setParameter("id", "%" + id + "%")
+				.setParameter("nombre", "%" + nombre + "%")
+				.setParameter("curso", "%" + curso + "%")
+				.setParameter("tasa", "%" + tasa + "%");;
 		List<AsignaturaDTO> lista = query.getResultList();
 
 		s.close(); // Cerramos la sesión
@@ -75,7 +78,7 @@ public class AsignaturaDAOImplHib implements AsignaturaDAO{
 		Session s = factory.getCurrentSession();
 		
 		s.beginTransaction();
-		Query query = s.createQuery("DELETE FROM AlumnoEntity where id = :id").setParameter("id", Integer.parseInt(id));
+		Query query = s.createQuery("DELETE FROM AsignaturasEntity where id = :id").setParameter("id", Integer.parseInt(id));
 		int result = query.executeUpdate();		
 		s.close();		
 		return result;
