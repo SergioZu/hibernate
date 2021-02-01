@@ -99,10 +99,10 @@ public class NotaDAOImplHib implements NotaDAO{
 		AlumnoEntity a =s.find(AlumnoEntity.class,Integer.parseInt(idAlumno));
 		AsignaturasEntity as =s.find(AsignaturasEntity.class,Integer.parseInt(idAsignatura));
 		
-		NotasEntity no = new NotasEntity(a, as, Double.parseDouble(nota), fecha);
+		NotasEntity no = new NotasEntity(Integer.parseInt(idNota),a, as, Double.parseDouble(nota), fecha);
 		
 		
-		s.update(a);
+		s.update(no);
 		s.getTransaction().commit();
 
 		return no.getId();
