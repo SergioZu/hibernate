@@ -1,6 +1,8 @@
 package com.kike.colegio.entities;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,129 +18,84 @@ import javax.persistence.Table;
 public class MatriculacionesEntity {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
+	
 
+	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+	@JoinColumn(name ="id_alumno")
+	private AlumnoEntity alumnos;
+	
+	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+	@JoinColumn(name ="id_asignatura")
+	private AsignaturasEntity asignaturas;
 
 	@Column(name = "fecha")
-	private int fecha;
+	private String fecha;
 	
 	@Column(name = "activo")
 	private int activo;
-	
-    @ManyToOne
-    @MapsId("id") //Nombre de la PK en la clase Alumno
-    @JoinColumn(name = "id_alumno") //Nombre de la columna (tabla matriculaciones)
-    private AlumnoEntity alumno;
 
-    @ManyToOne
-    @MapsId("id") //Nombre de la PK en la clase Alumno
-    @JoinColumn(name = "id_asignatura") //Nombre de la columna (tabla matriculaciones)
-    private AsignaturasEntity asignatura;
-
-
-	
-
-	
-	//Constructores, Getters y setters 
-    
-	public MatriculacionesEntity() {
-		super();
-	}
-
-
-
-
-
-	public MatriculacionesEntity(int id, int fecha, int activo, AlumnoEntity alumno, AsignaturasEntity asignatura) {
+	public MatriculacionesEntity(int id, AlumnoEntity alumnos, AsignaturasEntity asignaturas, String fecha,
+			int activo) {
 		super();
 		this.id = id;
+		this.alumnos = alumnos;
+		this.asignaturas = asignaturas;
 		this.fecha = fecha;
 		this.activo = activo;
-		this.alumno = alumno;
-		this.asignatura = asignatura;
 	}
 
-
-
-
+	public MatriculacionesEntity(AlumnoEntity alumnos, AsignaturasEntity asignaturas, String fecha, int activo) {
+		super();
+		this.alumnos = alumnos;
+		this.asignaturas = asignaturas;
+		this.fecha = fecha;
+		this.activo = activo;
+	}
 
 	public int getId() {
 		return id;
 	}
 
-
-
-
-
 	public void setId(int id) {
 		this.id = id;
 	}
 
+	public AlumnoEntity getAlumnos() {
+		return alumnos;
+	}
 
+	public void setAlumnos(AlumnoEntity alumnos) {
+		this.alumnos = alumnos;
+	}
 
+	public AsignaturasEntity getAsignaturas() {
+		return asignaturas;
+	}
 
+	public void setAsignaturas(AsignaturasEntity asignaturas) {
+		this.asignaturas = asignaturas;
+	}
 
-	public int getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
 
-
-
-
-
-	public void setFecha(int fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
-
-
-
-
 
 	public int getActivo() {
 		return activo;
 	}
 
-
-
-
-
 	public void setActivo(int activo) {
 		this.activo = activo;
 	}
-
-
-
-
-
-	public AlumnoEntity getAlumno() {
-		return alumno;
-	}
-
-
-
-
-
-	public void setAlumno(AlumnoEntity alumno) {
-		this.alumno = alumno;
-	}
-
-
-
-
-
-	public AsignaturasEntity getAsignatura() {
-		return asignatura;
-	}
-
-
-
-
-
-	public void setAsignatura(AsignaturasEntity asignatura) {
-		this.asignatura = asignatura;
-	}  
+	
+   
 	
 	
 	

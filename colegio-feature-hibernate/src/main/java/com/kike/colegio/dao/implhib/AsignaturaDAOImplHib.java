@@ -86,13 +86,37 @@ public class AsignaturaDAOImplHib implements AsignaturaDAO{
 
 	@Override
 	public int obtenerNumeroAsignaturasMatriculadas(String idAlumno) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		String jpql = " select count(*) "
+				+ "FROM MatriculacionesEntity m where  CAST( m.alumnos.id AS string )  LIKE :idAlumno";
+
+		SessionFactory factory = DBUtils.creadorSessionFactory();
+		Session s = factory.getCurrentSession();
+		s.beginTransaction();
+
+		Query query = s.createQuery(jpql).setParameter("idAlumno", "%" + idAlumno + "%");
+		
+		int numAsigMatriculadas = query.getFirstResult();
+		s.close();	
+		return numAsigMatriculadas;
+		
+		
 	}
 
 	@Override
 	public double obtenerTasaAsignatura(String idAsignatura) {
-		return 0;
+		String jpql = " select  (a.tasa) "
+				+ "FROM AsignaturasEntity a where  CAST( a.id AS string )  LIKE :idAsignatura ";
+
+		SessionFactory factory = DBUtils.creadorSessionFactory();
+		Session s = factory.getCurrentSession();
+		s.beginTransaction();
+
+		Query query = s.createQuery(jpql).setParameter("idAsignatura", "%" + idAsignatura + "%");
+		
+		Double numtasa =(double) query.getFirstResult();
+		s.close();	
+		return numtasa;
 	}
 		
 }

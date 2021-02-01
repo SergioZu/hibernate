@@ -19,10 +19,12 @@ public class MatriculacionDAOImplHib implements MatriculacionDAO {
 	public List<MatriculacionDTO> obtenerMatriculacionesPorIdasigNombreAsigIdalumNombrealumFechaActivo(String idAsig,
 			String nombreAsig, String idAlum, String nombreAlum, String fecha, String activo) {
 		String jpql = "select new com.kike.colegio.dtos.MatriculacionDTO "
-					+ " (asig.id, asig.nombre, a.id, a.nombre, m.fecha, m.activo) "
-					+ " FROM  AsignaturasEntity asig, MatriculacionesEntity m, AlumnoEntity a "
-					+ " WHERE m.alumnos.id=a.id and  m.asignaturas.id=asig.id and n.alumnos.id=a.id and  n.asignaturas.id=asig.id and CAST( asig.id AS string ) LIKE :idAsig AND asig.nombre LIKE :nombreAsig"
-					+ " AND CAST( a.id AS string ) LIKE :idAlum  AND a.nombre LIKE :aNombre  AND m.fecha LIKE :fecha and  CAST( m.activo AS string ) LIKE :activo";
+					+ " (m.id, asig.id, asig.nombre, a.id, a.nombre, m.fecha, m.activo) "
+					+ " FROM MatriculacionesEntity m, AlumnoEntity a, AsignaturasEntity asig "
+					+ " WHERE m.alumnos.id=a.id and  m.asignaturas.id=asig.id and"
+					+ " CAST( asig.id AS string ) LIKE :idAsig AND asig.nombre LIKE :nombreAsig"
+					+ " AND CAST( a.id AS string ) LIKE :idAlum  AND a.nombre LIKE :aNombre  AND m.fecha LIKE :fecha "
+					+ " and  CAST( m.activo AS string ) LIKE :activo";
 		
 		
 		
@@ -58,10 +60,16 @@ public class MatriculacionDAOImplHib implements MatriculacionDAO {
 		Session s = factory.getCurrentSession();
 		
 		s.beginTransaction();
-		Query query = s.createQuery("DELETE FROM MatriculacionesEntity where id = :id").setParameter("id", Integer.parseInt(idMatricula));
-		int result = query.executeUpdate();		
+		
+		Query query1 = s.createQuery("DELETE FROM CajaEntity where idmatricula = :id").setParameter("id", Integer.parseInt(idMatricula));
+		query1.executeUpdate();
+		
+		Query query2 = s.createQuery("DELETE FROM MatriculacionesEntity where id = :id").setParameter("id", Integer.parseInt(idMatricula));
+		int result = query2.executeUpdate();		
 		s.close();		
 		return result;
+		
+		
 	}
 
 	

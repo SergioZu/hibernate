@@ -50,6 +50,8 @@ public class MatriculacionDTO {
 		this.activo = activo;
 	}
 	
+	
+	
 	/**
 	 * 
 	 */

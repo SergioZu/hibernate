@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kike.colegio.dao.MatriculacionDAO;
+import com.kike.colegio.dao.NotaDAO;
 import com.kike.colegio.dao.impl.MatriculacionDAOImpl;
 import com.kike.colegio.dao.implhib.MatriculacionDAOImplHib;
+import com.kike.colegio.dao.implhib.NotaDAOImplHib;
 
 /**
  * Servlet Implation class BorrarMatriculacionesController
@@ -50,6 +52,7 @@ public class BorrarMatriculacionesController extends HttpServlet {
 		
 		RequestDispatcher d = request.getServletContext().getRequestDispatcher("/WEB-INF/vistas/matriculaciones/borrarMatriculaciones.jsp");
 		d.forward(request, response);
+		
 		
 	}
 
