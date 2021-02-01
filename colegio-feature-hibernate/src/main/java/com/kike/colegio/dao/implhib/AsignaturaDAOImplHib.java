@@ -30,7 +30,7 @@ public class AsignaturaDAOImplHib implements AsignaturaDAO{
 		Query query = s.createQuery(jpql).setParameter("id", "%" + id + "%")
 				.setParameter("nombre", "%" + nombre + "%")
 				.setParameter("curso", "%" + curso + "%")
-				.setParameter("tasa", "%" + tasa + "%");;
+				.setParameter("tasa", "%" + tasa + "%");
 		List<AsignaturaDTO> lista = query.getResultList();
 
 		s.close(); // Cerramos la sesión
@@ -88,15 +88,15 @@ public class AsignaturaDAOImplHib implements AsignaturaDAO{
 	public int obtenerNumeroAsignaturasMatriculadas(String idAlumno) {
 		
 		String jpql = " select count(*) "
-				+ "FROM MatriculacionesEntity m where  CAST( m.alumnos.id AS string )  LIKE :idAlumno";
+				+ "FROM MatriculacionesEntity m where  CAST( m.alumnos.id AS string )  LIKE :id";
 
 		SessionFactory factory = DBUtils.creadorSessionFactory();
 		Session s = factory.getCurrentSession();
 		s.beginTransaction();
 
-		Query query = s.createQuery(jpql).setParameter("idAlumno", "%" + idAlumno + "%");
+		Query query = s.createQuery(jpql).setParameter("id", "%" + idAlumno + "%");
 		
-		int numAsigMatriculadas = query.getFirstResult();
+		int numAsigMatriculadas = (int) query.getFirstResult();
 		s.close();	
 		return numAsigMatriculadas;
 		
@@ -105,16 +105,16 @@ public class AsignaturaDAOImplHib implements AsignaturaDAO{
 
 	@Override
 	public double obtenerTasaAsignatura(String idAsignatura) {
-		String jpql = " select  (a.tasa) "
-				+ "FROM AsignaturasEntity a where  CAST( a.id AS string )  LIKE :idAsignatura ";
+		String jpql = " select new com.kike.colegio.dtos.AsignaturaDTO (a.tasa) "
+				+ "FROM AsignaturasEntity a where  CAST( a.id AS string )  LIKE :id ";
 
 		SessionFactory factory = DBUtils.creadorSessionFactory();
 		Session s = factory.getCurrentSession();
 		s.beginTransaction();
 
-		Query query = s.createQuery(jpql).setParameter("idAsignatura", "%" + idAsignatura + "%");
+		Query query = s.createQuery(jpql).setParameter("id", "%" + idAsignatura + "%");
 		
-		Double numtasa =(double) query.getFirstResult();
+		Double numtasa = (double) query.getFirstResult();
 		s.close();	
 		return numtasa;
 	}

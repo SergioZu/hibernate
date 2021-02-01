@@ -25,6 +25,15 @@ public class AsignaturaDTO {
 		this.tasa = tasa;
 	}
 
+	
+
+
+
+	public AsignaturaDTO(int tasa) {
+		super();
+		this.tasa = tasa;
+	}
+
 
 
 
