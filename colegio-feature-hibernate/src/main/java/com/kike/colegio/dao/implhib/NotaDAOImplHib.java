@@ -46,8 +46,8 @@ public class NotaDAOImplHib implements NotaDAO{
 		String jpql = "select new com.kike.colegio.dtos.NotaDTO"
 				+ " (n.id, a.id, a.nombre, asig.id, asig.nombre, n.nota, n.fecha) "
 				+ "FROM NotasEntity n,  AlumnoEntity a, AsignaturasEntity asig  "
-				+ "where  a.nombre LIKE :nombre and asig.nombre LIKE :asignatura "
-				+ "AND n.fecha  LIKE :fecha ";
+				+ "where a.nombre LIKE :nombre and asig.nombre LIKE :asignatura "
+				+ "and n.fecha  LIKE :fecha ";
 		
 
 		SessionFactory factory = DBUtils.creadorSessionFactory();
@@ -94,13 +94,14 @@ public class NotaDAOImplHib implements NotaDAO{
 		
 		SessionFactory factory = DBUtils.creadorSessionFactory();
 		Session s = factory.getCurrentSession();
+		s.beginTransaction();
 		
 		AlumnoEntity a =s.find(AlumnoEntity.class,Integer.parseInt(idAlumno));
 		AsignaturasEntity as =s.find(AsignaturasEntity.class,Integer.parseInt(idAsignatura));
 		
 		NotasEntity no = new NotasEntity(a, as, Double.parseDouble(nota), fecha);
 		
-		s.beginTransaction();
+		
 		s.update(a);
 		s.getTransaction().commit();
 

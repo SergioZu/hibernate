@@ -56,7 +56,7 @@ public class FormularioActualizarNotasController extends HttpServlet {
 				
 		List<NotaDTO> listaNota = new ArrayList<>();
 	 	
-		listaNota = n.obtenerNotaPorNombreAsignaturaFecha(nombre, asignatura, fecha);
+		listaNota = n.obtenerNotaPorIdNombreAsignaturaNotaFecha("", nombre, asignatura, "", fecha);
 	 	
 		request.setAttribute("lista", listaNota);
 		

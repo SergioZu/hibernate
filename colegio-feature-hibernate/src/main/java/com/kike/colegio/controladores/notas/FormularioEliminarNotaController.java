@@ -48,7 +48,7 @@ public class FormularioEliminarNotaController extends HttpServlet {
 		
 		NotaDAO n= new NotaDAOImplHib();
 		
-		request.setAttribute("lista",n.obtenerNotaPorNombreAsignaturaFecha(nombre, asignatura, fecha));
+		request.setAttribute("lista",n.obtenerNotaPorIdNombreAsignaturaNotaFecha("", nombre, asignatura, "", fecha));
 		
 		RequestDispatcher d = getServletContext().getRequestDispatcher("/WEB-INF/vistas/notas/borrarNotas.jsp");
 		d.forward(request, response);
