@@ -40,7 +40,7 @@ public class InsertarMatriculacionesController extends HttpServlet {
 		ComboUtils.recuperarComboAlumnos(request);
 		ComboUtils.recuperarComboAsignaturas(request);
 		
-		RequestDispatcher d = getServletContext().getRequestDispatcher("/WEB-INF/jsp/vistas/matriculaciones/insertarMatriculaciones.jsp");
+		RequestDispatcher d = getServletContext().getRequestDispatcher("/WEB-INF/vistas/matriculaciones/insertarMatriculaciones.jsp");
 		d.forward(request, response);
 	}
 
@@ -64,7 +64,7 @@ public class InsertarMatriculacionesController extends HttpServlet {
 		ComboUtils.recuperarComboAlumnos(request);
 		ComboUtils.recuperarComboAsignaturas(request);
 				
-		RequestDispatcher d = getServletContext().getRequestDispatcher("/WEB-INF/jsp/vistas/matriculaciones/insertarMatriculaciones.jsp");
+		RequestDispatcher d = getServletContext().getRequestDispatcher("/WEB-INF/vistas/matriculaciones/insertarMatriculaciones.jsp");
 		d.forward(request, response);
 		
 	}

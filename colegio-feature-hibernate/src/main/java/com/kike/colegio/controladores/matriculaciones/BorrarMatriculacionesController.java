@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kike.colegio.dao.MatriculacionDAO;
 import com.kike.colegio.dao.impl.MatriculacionDAOImpl;
+import com.kike.colegio.dao.implhib.MatriculacionDAOImplHib;
 
 /**
  * Servlet Implation class BorrarMatriculacionesController
@@ -41,13 +42,13 @@ public class BorrarMatriculacionesController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String idMatricula = request.getParameter("idMatricula");
 		
-		MatriculacionDAO m = new MatriculacionDAOImpl();
+		MatriculacionDAO m = new MatriculacionDAOImplHib();
 		
 		Integer resultado = m.borrarMatriculacion(idMatricula);
 		
 		request.setAttribute("resultado", resultado);
 		
-		RequestDispatcher d = request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/vistas/matriculaciones/borrarMatriculaciones.jsp");
+		RequestDispatcher d = request.getServletContext().getRequestDispatcher("/WEB-INF/vistas/matriculaciones/borrarMatriculaciones.jsp");
 		d.forward(request, response);
 		
 	}

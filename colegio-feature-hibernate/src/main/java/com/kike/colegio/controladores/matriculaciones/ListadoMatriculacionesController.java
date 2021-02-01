@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kike.colegio.dao.MatriculacionDAO;
 import com.kike.colegio.dao.impl.MatriculacionDAOImpl;
+import com.kike.colegio.dao.implhib.MatriculacionDAOImplHib;
 import com.kike.colegio.dtos.MatriculacionDTO;
 
 /**
@@ -34,7 +35,7 @@ public class ListadoMatriculacionesController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher d = getServletContext().getRequestDispatcher("/WEB-INF/jsp/vistas/matriculaciones/listadoMatriculaciones.jsp");
+		RequestDispatcher d = getServletContext().getRequestDispatcher("/WEB-INF/vistas/matriculaciones/listadoMatriculaciones.jsp");
 		d.forward(request, response);
 	}
 
@@ -49,13 +50,13 @@ public class ListadoMatriculacionesController extends HttpServlet {
 		String fecha = request.getParameter("fecha");
 		String activo = request.getParameter("activo");
 		
-		MatriculacionDAO m = new MatriculacionDAOImpl();
+		MatriculacionDAO m = new MatriculacionDAOImplHib();
 		
 		List<MatriculacionDTO> listaMatriculaciones = m.obtenerMatriculacionesPorIdasigNombreAsigIdalumNombrealumFechaActivo(idAsig, nombreAsig, idAlum, nombreAlum, fecha, activo);
 		
 		request.setAttribute("lista", listaMatriculaciones);
 		
-		RequestDispatcher d = getServletContext().getRequestDispatcher("/WEB-INF/jsp/vistas/matriculaciones/listadoMatriculaciones.jsp");
+		RequestDispatcher d = getServletContext().getRequestDispatcher("/WEB-INF/vistas/matriculaciones/listadoMatriculaciones.jsp");
 		d.forward(request, response);
 		
 	}
