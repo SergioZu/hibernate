@@ -52,7 +52,7 @@ public class AsignaturaDAOImplHib implements AsignaturaDAO{
 
 
 		s.getTransaction().commit();
-
+		s.close();
 		return idPk;
 	}
 
