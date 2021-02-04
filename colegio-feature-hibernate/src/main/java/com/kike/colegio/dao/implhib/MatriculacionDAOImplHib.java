@@ -11,6 +11,10 @@ import com.kike.colegio.dao.MatriculacionDAO;
 import com.kike.colegio.dtos.AlumnoDTO;
 import com.kike.colegio.dtos.MatriculacionDTO;
 import com.kike.colegio.entities.AlumnoEntity;
+import com.kike.colegio.entities.AsignaturasEntity;
+import com.kike.colegio.entities.CajaEntity;
+import com.kike.colegio.entities.MatriculacionesEntity;
+import com.kike.colegio.entities.NotasEntity;
 import com.kike.colegio.utils.DBUtils;
 
 public class MatriculacionDAOImplHib implements MatriculacionDAO {
@@ -50,8 +54,25 @@ public class MatriculacionDAOImplHib implements MatriculacionDAO {
 
 	@Override
 	public Integer insertarMatriculacion(String idAsignatura, String idAlumno, String tasa, String fecha) {
-		// TODO Auto-generated method stub
-		return null;
+		SessionFactory factory = DBUtils.creadorSessionFactory();
+		Session s = factory.getCurrentSession();
+		s.beginTransaction();
+		
+		
+		AlumnoEntity a =s.find(AlumnoEntity.class,Integer.parseInt(idAlumno));
+		AsignaturasEntity as =s.find(AsignaturasEntity.class,Integer.parseInt(idAsignatura));
+		
+		MatriculacionesEntity no = new MatriculacionesEntity(a, as, fecha, 1);
+		 Integer idPk = (Integer) s.save(no);
+		
+		CajaEntity cajaEntity=new CajaEntity((no.getId()+1), no,Double.parseDouble(tasa));
+		
+		s.save(cajaEntity);
+
+		s.getTransaction().commit();
+		s.close();
+
+		return idPk;
 	}
 
 	@Override

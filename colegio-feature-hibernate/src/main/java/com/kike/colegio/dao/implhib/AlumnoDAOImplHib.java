@@ -119,7 +119,21 @@ public class AlumnoDAOImplHib implements AlumnoDAO {
 
 	@Override
 	public boolean esFamiliaNumerosa(String idAlumno) {
-		// TODO Auto-generated method stub
+		String hql = "select new com.kike.colegio.dtos.AlumnoDTO (a.famNumerosa)" + " FROM AlumnoEntity a where CAST( a.id AS string )  LIKE :id ";
+		SessionFactory factory = DBUtils.creadorSessionFactory();
+		Session s = factory.getCurrentSession();
+		s.beginTransaction();
+
+//		Query <AlumnoEntity> query = s.createQuery(hql, AlumnoEntity.class);
+		Query query = s.createQuery(hql).setParameter("id", "%" + idAlumno + "%");
+		List<AlumnoDTO> lista = query.getResultList();
+		s.close(); // Cerramos la sesión
+		
+		if(lista.get(0).getFamNumerosa()>0) {
+			return true;
+		}
+		
 		return false;
+
 	}
 }

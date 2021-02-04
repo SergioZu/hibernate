@@ -56,10 +56,10 @@ public class AlumnoDTO {
 		this.famNumerosa = famNumerosa;
 	}
 
-
-
-
-
+	public AlumnoDTO(Integer famNumerosa) {
+		super();
+		this.famNumerosa = famNumerosa;
+	}
 
 
 

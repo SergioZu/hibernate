@@ -87,16 +87,19 @@ public class AsignaturaDAOImplHib implements AsignaturaDAO{
 	@Override
 	public int obtenerNumeroAsignaturasMatriculadas(String idAlumno) {
 		
-		String jpql = " select count(*) "
-				+ "FROM MatriculacionesEntity m where  CAST( m.alumnos.id AS string )  LIKE :id";
+		String jpql = "select new com.kike.colegio.dtos.MatriculacionDTO "
+				+ " (asig.id) "
+				+ " FROM MatriculacionesEntity m, AlumnoEntity a, AsignaturasEntity asig "
+				+ " WHERE m.alumnos.id=a.id and  m.asignaturas.id=asig.id and "
+				+  "CAST( a.id AS string ) LIKE :idAlum  ";
 
 		SessionFactory factory = DBUtils.creadorSessionFactory();
 		Session s = factory.getCurrentSession();
 		s.beginTransaction();
 
-		Query query = s.createQuery(jpql).setParameter("id", "%" + idAlumno + "%");
-		
-		int numAsigMatriculadas = (int) query.getFirstResult();
+		Query query = s.createQuery(jpql).setParameter("idAlum", "%" + idAlumno + "%");
+		List<AsignaturaDTO> lista = query.getResultList();
+		int numAsigMatriculadas = lista.size();
 		s.close();	
 		return numAsigMatriculadas;
 		
@@ -113,8 +116,9 @@ public class AsignaturaDAOImplHib implements AsignaturaDAO{
 		s.beginTransaction();
 
 		Query query = s.createQuery(jpql).setParameter("id", "%" + idAsignatura + "%");
-		
-		Double numtasa = (double) query.getFirstResult();
+		List<AsignaturaDTO> lista = query.getResultList();
+		 
+		Double numtasa = (double) lista.get(0).getTasa();
 		s.close();	
 		return numtasa;
 	}

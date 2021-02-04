@@ -52,6 +52,11 @@ public class MatriculacionDTO {
 	
 	
 	
+	public MatriculacionDTO(Integer idAsignatura) {
+		super();
+		this.idAsignatura = idAsignatura;
+	}
+
 	/**
 	 * 
 	 */

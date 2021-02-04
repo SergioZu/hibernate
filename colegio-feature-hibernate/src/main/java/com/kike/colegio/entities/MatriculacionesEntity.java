@@ -54,6 +54,13 @@ public class MatriculacionesEntity {
 		this.fecha = fecha;
 		this.activo = activo;
 	}
+	
+	
+
+	public MatriculacionesEntity(AsignaturasEntity asignaturas) {
+		super();
+		this.asignaturas = asignaturas;
+	}
 
 	public int getId() {
 		return id;
