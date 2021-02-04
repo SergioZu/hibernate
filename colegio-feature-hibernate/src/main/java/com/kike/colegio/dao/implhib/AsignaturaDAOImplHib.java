@@ -88,7 +88,7 @@ public class AsignaturaDAOImplHib implements AsignaturaDAO{
 	public int obtenerNumeroAsignaturasMatriculadas(String idAlumno) {
 		
 		String jpql = "select new com.kike.colegio.dtos.MatriculacionDTO "
-				+ " (asig.id) "
+				+ " (a.id) "
 				+ " FROM MatriculacionesEntity m, AlumnoEntity a, AsignaturasEntity asig "
 				+ " WHERE m.alumnos.id=a.id and  m.asignaturas.id=asig.id and "
 				+  "CAST( a.id AS string ) LIKE :idAlum  ";
