@@ -88,18 +88,20 @@ public class AsignaturaDAOImplHib implements AsignaturaDAO{
 	public int obtenerNumeroAsignaturasMatriculadas(String idAlumno) {
 		
 		String jpql = "select new com.kike.colegio.dtos.MatriculacionDTO "
-				+ " (a.id) "
-				+ " FROM MatriculacionesEntity m, AlumnoEntity a, AsignaturasEntity asig "
-				+ " WHERE m.alumnos.id=a.id and  m.asignaturas.id=asig.id and "
-				+  "CAST( a.id AS string ) LIKE :idAlum  ";
+				+ " ( a.id ) "
+				+ " FROM MatriculacionesEntity m, AlumnoEntity a "
+				+ " WHERE m.alumnos.id=a.id  and"
+				+ " CAST( a.id AS string ) LIKE :idAlum  ";
 
 		SessionFactory factory = DBUtils.creadorSessionFactory();
 		Session s = factory.getCurrentSession();
 		s.beginTransaction();
 
-		Query query = s.createQuery(jpql).setParameter("idAlum", "%" + idAlumno + "%");
-		List<AsignaturaDTO> lista = query.getResultList();
-		int numAsigMatriculadas = lista.size();
+		Query query = s.createQuery(jpql).setParameter("idAlum",  idAlumno );
+		List<AlumnoDTO> lista = query.getResultList();
+		
+		int numAsigMatriculadas = lista.size();;
+		
 		s.close();	
 		return numAsigMatriculadas;
 		
