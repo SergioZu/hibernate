@@ -1,20 +1,20 @@
 package com.kike.colegio.dao.implhib;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
-import com.kike.colegio.dao.AlumnoDAO;
+
 import com.kike.colegio.dao.MatriculacionDAO;
-import com.kike.colegio.dtos.AlumnoDTO;
 import com.kike.colegio.dtos.MatriculacionDTO;
 import com.kike.colegio.entities.AlumnoEntity;
 import com.kike.colegio.entities.AsignaturasEntity;
 import com.kike.colegio.entities.CajaEntity;
 import com.kike.colegio.entities.MatriculacionesEntity;
-import com.kike.colegio.entities.NotasEntity;
 import com.kike.colegio.utils.DBUtils;
 
 public class MatriculacionDAOImplHib implements MatriculacionDAO {
@@ -61,6 +61,13 @@ public class MatriculacionDAOImplHib implements MatriculacionDAO {
 		
 		AlumnoEntity a =s.find(AlumnoEntity.class,Integer.parseInt(idAlumno));
 		AsignaturasEntity as =s.find(AsignaturasEntity.class,Integer.parseInt(idAsignatura));
+		
+		Date cdareDate= new Date(1);
+		String fdate=new SimpleDateFormat("yyy-MM-dd").format(cdareDate);
+		
+		if(fecha=="") {
+			fecha=fdate;
+		}
 		
 		MatriculacionesEntity no = new MatriculacionesEntity(a, as, fecha, 1);
 		 Integer idPk = (Integer) s.save(no);
